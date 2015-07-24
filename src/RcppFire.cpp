@@ -104,3 +104,32 @@ void arrayfire_set_setseed_random( const unsigned int seed ) {
 	}
 }
 
+
+//' Get information about memory manager
+//' @export 
+//' @details 
+//' @return  
+//' @note 
+//' @seealso   
+// [[Rcpp::export]]
+Rcpp::IntegerVector arrayfire_device_mem_info(){
+	size_t alloc_bytes = 0;
+	size_t alloc_buffers = 0;
+	size_t lock_bytes = 0;
+	size_t lock_buffers = 0;
+	
+	try{
+		af::deviceMemInfo(&alloc_bytes, &alloc_buffers,
+				&lock_bytes, &lock_buffers);
+	}
+	catch(af::exception &ex){
+		Rcpp::stop(ex.what());
+	}
+
+	return Rcpp::IntegerVector::create(
+			Rcpp::Named("# of bytes allocated") = alloc_bytes,
+			Rcpp::Named("# of buffers created") = alloc_buffers,
+			Rcpp::Named("# of bytes in use") = lock_bytes,
+			Rcpp::Named("# of buffers in use") = lock_buffers ) ;
+}
+
