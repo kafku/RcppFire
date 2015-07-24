@@ -14,7 +14,7 @@ Rcpp::List arrayfire_device_prop() {
 		 toolkit[64],
 		 compute[64];
 
-	af::deviceprop( name, platform, toolkit, compute ) ;
+	af::deviceinfo( name, platform, toolkit, compute ) ;
 
 	return Rcpp::List::create(
 			Rcpp::Named("name") = std::string(name),
@@ -32,7 +32,7 @@ Rcpp::List arrayfire_device_prop() {
 // [[Rcpp::export]]
 void arrayfire_set_device( const int index ) {
 	try{
-		af::deviceset( index - 1 );
+		af::setDevice( index - 1 );
 	}
 	catch( af::exception &ex ){
 		Rcpp::Rcerr << "arrayfire exception" << std::endl;
@@ -55,7 +55,7 @@ void arrayfire_set_device( const int index ) {
 // [[Rcpp::export]]
 int arrayfire_get_device() {
 	// increment by 1 since the index of device start from 0
-	return af::deviceget() + 1 ;
+	return af::getDevice() + 1 ;
 }
 
 //' Return the number of available device 
@@ -66,7 +66,7 @@ int arrayfire_get_device() {
 //' @seealso   
 // [[Rcpp::export]]
 int arrayfire_count_device() {
-	return af::devicecount() ;
+	return af::getDeviceCount() ;
 }
 
 //' Set the seed for the random number generator in ArrayFire
