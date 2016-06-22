@@ -1,6 +1,22 @@
 #include <RcppFire.h>
 
 
+//' Report the information about ArrayFire
+//' @export
+//' @details 
+//' @return  
+//' @note 
+//' @seealso   
+// [[Rcpp::export]]
+void arrayfire_info(){
+	try{
+		af::info();
+	}
+	catch(af::exception &ex){
+		Rcpp::stop(ex.what());
+	}
+}
+
 //' Report the information about current device and platform
 //' @export
 //' @details 
