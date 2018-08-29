@@ -39,7 +39,7 @@ install_github(repo = 'kafku/RcppFire@develop',
 
 ## Status
 
-Under development
+This package is not actively maintained now. See [RcppArrayFire](https://github.com/daqana/rcpparrayfire), which is a fork project of this package.
 
 ## Authors
 
